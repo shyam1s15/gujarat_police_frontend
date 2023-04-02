@@ -7,9 +7,7 @@ import 'dart:convert';
 
 
 void main() async {
-
      startApp();
-   
 }
 
 void startApp() async {

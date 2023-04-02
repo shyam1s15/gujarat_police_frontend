@@ -11,6 +11,7 @@ void main() async {
 }
 
 void startApp() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

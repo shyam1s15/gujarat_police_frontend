@@ -6,6 +6,7 @@ import 'package:window_manager/window_manager.dart';
 import 'dart:convert';
 
 void main() async {
+  
   startApp();
 }
 

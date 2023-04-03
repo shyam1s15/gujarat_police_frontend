@@ -1,25 +1,26 @@
 import 'package:e_bandobas/app/Exceptions/ValidationException.dart';
 import 'package:e_bandobas/app/jsondata/EventData/EventApi.dart';
+import 'package:e_bandobas/app/modules/assesment/controllers/assesment_controller.dart';
 import 'package:e_bandobas/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
-class AssessmentPOPPage extends  StatefulWidget {
+class AssessmentPOPPage extends StatefulWidget {
   const AssessmentPOPPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _AssessmentPoPPageState();
-
 }
-class _AssessmentPoPPageState extends State<AssessmentPOPPage>{
+
+class _AssessmentPoPPageState extends State<AssessmentPOPPage> {
   final _formKey = GlobalKey<FormState>();
   final eventNameTextEdit = TextEditingController();
   final eventDetailsTextEditingController = TextEditingController();
   final startDate = DateTime.now().obs;
   final endDate = DateTime.now().obs;
 
+  final AssesmentController assesmentController = Get.find();
 
   void chooseStartDate() async {
     DateTime? pickedDate = await showDatePicker(
@@ -58,22 +59,23 @@ class _AssessmentPoPPageState extends State<AssessmentPOPPage>{
       endDate.value = pickedDate;
     }
   }
+
   get myFocusNode => null;
-  void saveEvent() async{
+  void saveEvent() async {
     bool result = false;
-    if(eventNameTextEdit.text.isNotEmpty){
+    if (eventNameTextEdit.text.isNotEmpty) {
       result = await EventApi.createEvent(
           API_Decision.Only_Success,
           eventNameTextEdit.text,
           eventDetailsTextEditingController.text,
           startDate.value,
-          endDate.value
-      );
+          endDate.value);
       Navigator.of(context).pop();
     } else {
       ValidationException().showValidationSnackBar();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -176,7 +178,7 @@ class _AssessmentPoPPageState extends State<AssessmentPOPPage>{
                           height: 40,
                           width: MediaQuery.of(context).size.width * 0.55,
                           child: TextField(
-                            controller: eventDetailsTextEditingController ,
+                            controller: eventDetailsTextEditingController,
                             focusNode: myFocusNode,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(
@@ -195,37 +197,37 @@ class _AssessmentPoPPageState extends State<AssessmentPOPPage>{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Obx(() => Column(
-                      children: [
-                        Text(
-                          DateFormat("dd-MM-yyyy")
-                              .format(startDate.value)
-                              .toString(),
-                          style: const TextStyle(fontSize: 25),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            chooseStartDate();
-                          },
-                          child: const Text("શરૂઆતની તારીખ"),
-                        )
-                      ],
-                    )),
+                          children: [
+                            Text(
+                              DateFormat("dd-MM-yyyy")
+                                  .format(startDate.value)
+                                  .toString(),
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                chooseStartDate();
+                              },
+                              child: const Text("શરૂઆતની તારીખ"),
+                            )
+                          ],
+                        )),
                     Obx(() => Column(
-                      children: [
-                        Text(
-                          DateFormat("dd-MM-yyyy")
-                              .format(endDate.value)
-                              .toString(),
-                          style: const TextStyle(fontSize: 25),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            chooseEndDate();
-                          },
-                          child: const Text(" સમાપ્તિ તારીખ"),
-                        )
-                      ],
-                    ))
+                          children: [
+                            Text(
+                              DateFormat("dd-MM-yyyy")
+                                  .format(endDate.value)
+                                  .toString(),
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                chooseEndDate();
+                              },
+                              child: const Text(" સમાપ્તિ તારીખ"),
+                            )
+                          ],
+                        ))
                   ],
                 ),
                 Container(
@@ -254,9 +256,16 @@ class _AssessmentPoPPageState extends State<AssessmentPOPPage>{
                         width: 150,
                         height: 36,
                         child: ElevatedButton(
-                          onPressed: () {
-                            
+                          onPressed: () async {
                             saveEvent();
+                            bool result = await assesmentController.saveEvent(
+                                eventNameTextEdit.text,
+                                eventDetailsTextEditingController.text,
+                                startDate.value,
+                                endDate.value);
+                            if (result) {
+                                Navigator.of(context).pop();
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black87,

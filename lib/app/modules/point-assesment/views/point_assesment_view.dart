@@ -1,4 +1,3 @@
-import 'package:e_bandobas/app/resource/button/collapsebutton.dart';
 import 'package:e_bandobas/app/resource/drawer/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -110,31 +109,46 @@ class PointAssesmentView extends GetView<PointAssesmentController> {
   }
   Widget eventSelectionDropDownWidget() {
     return Container(
+      height: 45,
+      width: 600,
       margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         children: [
           SizedBox(
             height: 35,
             width: 300,
-            child: DropdownButton(
-                hint: const Text("select event"),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                isExpanded: true,
+                hint: const Text("Select Event"),
                 value: controller.selectedEventId.value == 0
                     ? null
                     : controller.selectedEventId.value,
                 items: controller.events.value?.map((event) {
                   return DropdownMenuItem(
-                      value: event.id,
-                      child: Text(
-                        event.eventName.toString(),
-                        style: const TextStyle(
+                    value: event.id,
+                    child: Container(
+                      height: 40,
+                      width: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Text(
+                          event.eventName.toString(),
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black38,
-                            fontSize: 18.0),
-                      ));
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
                 }).toList(),
                 onChanged: (value) {
                   controller.changeSelectedEvent(value);
-                }),
+                },
+              ),
+            ),
           ),
         ],
       ),

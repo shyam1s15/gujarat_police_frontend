@@ -150,7 +150,8 @@ class DutypointallocationView extends GetView<DutypointallocationController> {
           height: 55,
           width: 300,
           margin: const EdgeInsets.all(10),
-          child: DropdownButton(
+          child:  DropdownButtonHideUnderline(
+            child: DropdownButton(
               value: controller.selectedEventId.value,
               items: controller.events.value!.map((event) {
                 return DropdownMenuItem(
@@ -166,7 +167,9 @@ class DutypointallocationView extends GetView<DutypointallocationController> {
               }).toList(),
               onChanged: (value) {
                 controller.changeSelectedEvent(value);
-              }),
+              },
+            ),
+          ),
         ),
       ]),
     );

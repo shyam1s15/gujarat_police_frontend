@@ -44,46 +44,51 @@ class ShowPointAssigment extends GetView<ShowPointPoliceAssementController> {
   }
   Widget eventSelectionDropDownWidget() {
     return Container(
-      padding: const EdgeInsets.all(8),
+      height: 45,
+      width: 600,
+      margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 160.0),
-              padding: const EdgeInsets.only(bottom: 2.0),
-              height: 55,
-              width: 250,
-              child: const Text(
-                'બંદોબસ્તનું નામ  :-',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black38,
-                    fontSize: 38.0),
+        children: [
+          SizedBox(
+            height: 35,
+            width: 300,
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                isExpanded: true,
+                hint: const Text("Select Event"),
+                value: controller.selectedEventId.value == 0
+                    ? null
+                    : controller.selectedEventId.value,
+                items: controller.events.value?.map((event) {
+                  return DropdownMenuItem(
+                    value: event.id,
+                    child: Container(
+                      height: 40,
+                      width: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Text(
+                          event.eventName.toString(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black38,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  controller.changeSelectedEvent(value);
+                },
               ),
             ),
-            Container(
-              height: 55,
-              width: 300,
-              margin: const EdgeInsets.all(10),
-              child: DropdownButton(
-                  value: controller.selectedEventId.value,
-                  items: controller.events.value!.map((event) {
-                    return DropdownMenuItem(
-                      alignment: Alignment.center,
-                      value: event.id, child: Text(event.eventName.toString() ,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black38,
-                          fontSize: 25.0),),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    controller.changeSelectedEvent(value);
-                  }),
-            ),
-          ]),
+          ),
+        ],
+      ),
     );
   }
-
   Widget pointSelectionDropDownWidget() {
     return Container(
       padding: const EdgeInsets.all(8),

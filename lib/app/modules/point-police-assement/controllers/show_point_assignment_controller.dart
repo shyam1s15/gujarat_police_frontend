@@ -34,7 +34,7 @@ class ShowPointPoliceAssementController extends GetxController {
     points.value = await PointApi.obtainAssignedPolicePointsInEvent(
         API_Decision.Only_Failure, selectedEventId.value);
     if (points.value != null && points.value!.length >= 0) {
-      selectedPointId.value = points.value!.  elementAt(0).id!.toInt();
+      selectedPointId.value = points.value!.elementAt(0).id!.toInt();
     }
     update();
   }
@@ -70,6 +70,10 @@ class ShowPointPoliceAssementController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
     loadPoints();
   }

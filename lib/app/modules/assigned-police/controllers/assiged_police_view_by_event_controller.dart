@@ -14,6 +14,10 @@ class AssignedPoliceByEventController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
   }
 

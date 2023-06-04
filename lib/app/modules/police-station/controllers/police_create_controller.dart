@@ -23,6 +23,10 @@ class PoliceCreateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
   }
 
@@ -91,7 +95,7 @@ class PoliceCreateController extends GetxController {
     String sampleExcelFileLocation =
         await PoliceApi.downloadSampleApi(API_Decision.Only_Failure);
     if (TextUtils.notBlankNotEmpty(sampleExcelFileLocation)) {
-        OpenFile.open(sampleExcelFileLocation);
+      OpenFile.open(sampleExcelFileLocation);
     } else {
       throw ValidationException(cause: "Sorry, download file not available")
           .showValidationSnackBar();

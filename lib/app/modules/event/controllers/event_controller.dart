@@ -7,20 +7,24 @@ class EventController extends GetxController {
   //TODO: Implement EventController
   final events = Rxn<List<Event>>();
   late final selectedEventId = 0.obs;
-  
+
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
     update();
   }
-  
+
   void loadEvents() async {
     events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
-    if (events.value != null && events.value!.isNotEmpty) {
-    }
+    if (events.value != null && events.value!.isNotEmpty) {}
     events.refresh();
     update();
   }
+
   void saveEvent() {}
 }

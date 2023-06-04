@@ -13,6 +13,10 @@ class DesignationViewController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadDesignations();
   }
 
@@ -32,8 +36,7 @@ class DesignationViewController extends GetxController {
   }
 
   deleteDesignation(num? id) async {
-    bool result = await DesignationApi.deleteDesignation(
-        API_Decision.BOTH, id);
+    bool result = await DesignationApi.deleteDesignation(API_Decision.BOTH, id);
     if (result) {
       designations.value!.removeWhere((d) => d.id == id);
       update();

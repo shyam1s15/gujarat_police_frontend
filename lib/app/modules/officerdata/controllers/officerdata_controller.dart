@@ -12,7 +12,8 @@ class OfficerdataController extends GetxController {
   //TODO: Implement OfficerdataController
   final policeList = Rxn<List<PoliceModel>>();
   final events = Rxn<List<Event>>();
-  final eventAssignmentCounts = Rxn<List<EventPoliceCountAssignedTotalRequestedModel>>();
+  final eventAssignmentCounts =
+      Rxn<List<EventPoliceCountAssignedTotalRequestedModel>>();
   late final selectedEventId = 0.obs;
   final policeDataGridSource = Rxn<PoliceGridSource>();
   // late PoliceGridSource policeGridSource;
@@ -32,7 +33,8 @@ class OfficerdataController extends GetxController {
 
   void getEventAssignments() async {
     eventAssignmentCounts.value =
-        await EventPoliceCountAPI.obtainEventPoliceCountAssignments(API_Decision.Only_Failure, selectedEventId.value);
+        await EventPoliceCountAPI.obtainEventPoliceCountAssignments(
+            API_Decision.Only_Failure, selectedEventId.value);
   }
 
   void changeSelectedEvent(num? value) {
@@ -45,11 +47,16 @@ class OfficerdataController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
   }
 
   void getPoliceData() async {
-    policeList.value = await PoliceApi.getPoliceInEvent(API_Decision.Only_Failure, selectedEventId.value);
+    policeList.value = await PoliceApi.getPoliceInEvent(
+        API_Decision.Only_Failure, selectedEventId.value);
     if (policeList.value != null) {
       policeDataGridSource.value = PoliceGridSource(policeList.value!);
     }

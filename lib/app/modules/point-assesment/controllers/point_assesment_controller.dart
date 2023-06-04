@@ -21,12 +21,12 @@ class PointAssesmentController extends GetxController {
   late final selectedPointId = 0.obs;
   final events = Rxn<List<Event>>();
   final eventAssignmentCounts =
-  Rxn<List<EventPoliceCountAssignedTotalRequestedModel>>();
+      Rxn<List<EventPoliceCountAssignedTotalRequestedModel>>();
   final pointPoliceAssignments = Rxn<List<PointPoliceCountAssignment>>();
 
   final selectedPointAssignment = Rxn<PointPoliceCountAssignment>();
   final selectedPointAssignmentDataGridSource =
-  Rxn<SelectedPointViewAssignmentDataGridSource>();
+      Rxn<SelectedPointViewAssignmentDataGridSource>();
 
   final pointList = Rxn<List<Point>>();
   final pointViewDataGridSource = Rxn<PointViewDataGridSource>();
@@ -44,7 +44,7 @@ class PointAssesmentController extends GetxController {
   }
 
   Future<SelectedPointViewAssignmentDataGridSource?>
-  getCreateUpdatePointAssignmentDataGridSource() async {
+      getCreateUpdatePointAssignmentDataGridSource() async {
     if (selectedPointAssignment.value != null) {
       selectedPointAssignmentDataGridSource.value =
           SelectedPointViewAssignmentDataGridSource(
@@ -74,8 +74,8 @@ class PointAssesmentController extends GetxController {
 
   void getEventAssignments() async {
     eventAssignmentCounts.value =
-    await EventPoliceCountAPI.obtainEventPoliceCountAssignments(
-        API_Decision.Only_Failure, selectedEventId.value);
+        await EventPoliceCountAPI.obtainEventPoliceCountAssignments(
+            API_Decision.Only_Failure, selectedEventId.value);
   }
 
   void loadEvents() async {
@@ -90,8 +90,8 @@ class PointAssesmentController extends GetxController {
   Future<void> loadPointAssignmentCount() async {
     if (events.value != null) {
       pointPoliceAssignments.value =
-      await PointPoliceCountApi.obtainEntireEventAssignments(
-          API_Decision.Only_Failure, selectedEventId.value);
+          await PointPoliceCountApi.obtainEntireEventAssignments(
+              API_Decision.Only_Failure, selectedEventId.value);
       if (pointPoliceAssignments.value != null) {
         if (pointPoliceAssignments.value!.length > 0) {
           selectedPointAssignment.value = pointPoliceAssignments.value![0];
@@ -114,10 +114,10 @@ class PointAssesmentController extends GetxController {
   void loadSelectedPointAssignmentCount() async {
     if (selectedEventId.value != null && selectedPointId.value != null) {
       selectedPointAssignment.value =
-      await PointPoliceCountApi.obtainPointPoliceAssignments(
-          API_Decision.Only_Failure,
-          selectedEventId.value,
-          selectedPointId.value);
+          await PointPoliceCountApi.obtainPointPoliceAssignments(
+              API_Decision.Only_Failure,
+              selectedEventId.value,
+              selectedPointId.value);
 
       selectedPointAssignment.value!.pointName = pointList.value!
           .firstWhere((element) => element.id == selectedPointId.value)
@@ -144,6 +144,10 @@ class PointAssesmentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadEvents();
     loadPoints();
     loadDesignationFromAssignments();
@@ -157,7 +161,7 @@ class PointAssesmentController extends GetxController {
       pointViewDataGridCols.addAll(["ID", "Point Name"]);
       pointViewDataGridCols
           .addAll(designations.map((d) => d.designationName ?? ""));
-    print(pointViewDataGridCols);
+      print(pointViewDataGridCols);
     }
     print(pointViewDataGridCols);
   }

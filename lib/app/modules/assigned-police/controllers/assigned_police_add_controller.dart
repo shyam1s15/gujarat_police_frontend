@@ -30,9 +30,13 @@ class AssignedPoliceAddController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+    // loadPolice(); // police will be loaded once when events are loaded completely
+  }
+
+  void loadApiData() {
     loadEvents();
     loadPoints();
-    // loadPolice(); // police will be loaded once when events are loaded completely
   }
 
   void increment() => count.value++;

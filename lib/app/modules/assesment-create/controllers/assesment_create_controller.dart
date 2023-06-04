@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AssesmentCreateController extends GetxController {
-
   var designationTextEditingControllers = <TextEditingController>[];
   late final selectedEventId = 0.obs;
   final designations = Rxn<List<Designation>>();
@@ -42,23 +41,31 @@ class AssesmentCreateController extends GetxController {
     for (int i = 0; i < designations.value!.length; i++) {
       if (designationTextEditingControllers[i].text.isNotEmpty &&
           int.parse(designationTextEditingControllers[i].text) > 0) {
-        designationsData[designations.value![i].id.toString()] = designationTextEditingControllers[i].text;
+        designationsData[designations.value![i].id.toString()] =
+            designationTextEditingControllers[i].text;
       }
     }
     Map eventPoliceCountData = {
       "event-id": selectedEventId.value,
       "designations": designationsData
     };
-    EventPoliceCountModel e = EventPoliceCountModel(eventId: selectedEventId.value, designations: designationsData);
+    EventPoliceCountModel e = EventPoliceCountModel(
+        eventId: selectedEventId.value, designations: designationsData);
     bool result = await EventPoliceCountAPI.createAssignment(
         API_Decision.BOTH, eventPoliceCountData);
   }
+
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadDesignations();
     loadEvents();
   }
+
   void changeSelectedEvent(num? value) {
     selectedEventId.value = value!.toInt();
     update();

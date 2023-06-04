@@ -12,6 +12,10 @@ class PoliceStationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadPoliceStation();
   }
 
@@ -28,7 +32,8 @@ class PoliceStationController extends GetxController {
   void increment() => count.value++;
 
   void loadPoliceStation() async {
-    policeStations.value = await PoliceStationApi.obtainPoliceStationModel(API_Decision.BOTH);
+    policeStations.value =
+        await PoliceStationApi.obtainPoliceStationModel(API_Decision.BOTH);
     update();
   }
 }

@@ -37,6 +37,10 @@ class DutypointController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadApiData();
+  }
+
+  void loadApiData() {
     loadPoints();
     loadZones();
   }

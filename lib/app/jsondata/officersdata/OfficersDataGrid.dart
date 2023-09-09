@@ -184,6 +184,7 @@ class OfficerDataGrid extends StatelessWidget {
   }
 
   Future<List<Police>> generatecontentList() async {
+    // var response = await http.get(Uri.parse("${APIConstants.BASE_URL}/police/"));
     var response = await http.get(Uri.parse(APIConstants.POLICE_URL));
     var decodedOfficerss = jsonDecode(utf8.decode(response.bodyBytes));
     List<Police> policeListFromContent = [];

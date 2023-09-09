@@ -1,6 +1,5 @@
 import 'package:e_bandobas/app/resource/drawer/navigation_drawer.dart';
 import 'package:e_bandobas/app/resource/drawer/settingdrawer.dart';
-import 'package:e_bandobas/app/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

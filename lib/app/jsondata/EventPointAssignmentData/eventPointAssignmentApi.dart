@@ -12,7 +12,7 @@ import 'dart:convert' show utf8;
 import 'eventAssignmentModel.dart';
 
 class EventPointAssignmentModelApi {
-  static Future<EventPointAssignmentModel> obtainEventPointAssignments(
+  Future<EventPointAssignmentModel> obtainEventPointAssignments(
       API_Decision showStatus, int eventId, int pointId) async {
     EventPointAssignmentModel model;
     Map modelApiData = {
@@ -61,7 +61,7 @@ class EventPointAssignmentModelApi {
         .errorSnackBar();
   }
 
-  static Future<EventAssignmentModel?> obtainEventWiseAssignments(
+  Future<EventAssignmentModel?> obtainEventWiseAssignments(
       API_Decision showStatus, int eventId) async {
     EventAssignmentModel model;
     Map modelApiData = {
@@ -111,7 +111,7 @@ class EventPointAssignmentModelApi {
         .errorSnackBar();
   }
 
-  static obtainExcelFile(String url) async {
+  obtainExcelFile(String url) async {
     final response = await http.get(Uri.parse(url));
     final bytes = response.bodyBytes;
     if (bytes.isEmpty) {

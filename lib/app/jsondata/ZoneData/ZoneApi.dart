@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ZoneApi {
-  static Future<List<Zone>> obtainZones(API_Decision showStatus) async {
+  Future<List<Zone>> obtainZones(API_Decision showStatus) async {
     List<Zone> zones = <Zone>[];
     final response = await http.get(
       Uri.parse(APIConstants.ZONE_READ_ALL),

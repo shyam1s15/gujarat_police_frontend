@@ -32,7 +32,8 @@ class ShowPointPoliceAssementController extends GetxController {
   }
 
   void loadPoints() async {
-    points.value = await PointApi.obtainAssignedPolicePointsInEvent(
+    PointApi pointApi = PointApi();
+    points.value = await pointApi.obtainAssignedPolicePointsInEvent(
         API_Decision.Only_Failure, selectedEventId.value);
     if (points.value != null && points.value!.length >= 0) {
       selectedPointId.value = points.value!.  elementAt(0).id!.toInt();
@@ -51,8 +52,9 @@ class ShowPointPoliceAssementController extends GetxController {
   }
 
   void loadPointPoliceAssignmentData() async {
+    PointPoliceCountApi pointPoliceCountApi = PointPoliceCountApi();
     pointPoliceCountAssignment.value =
-        await PointPoliceCountApi.obtainPointPoliceAssignments(
+        await pointPoliceCountApi.obtainPointPoliceAssignments(
             API_Decision.BOTH, selectedEventId.value, selectedPointId.value);
     if (pointPoliceCountAssignment.value?.assignments != null) {
       for (var i in pointPoliceCountAssignment.value!.assignments!) {

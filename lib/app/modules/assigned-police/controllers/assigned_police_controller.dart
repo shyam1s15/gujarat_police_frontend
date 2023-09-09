@@ -26,7 +26,8 @@ class AssignedPoliceController extends GetxController {
   void increment() => count.value++;
 
   void loadPoints() async {
-    points.value = await PointApi.obtainPoints(API_Decision.Only_Failure);
+    PointApi pointApi = PointApi();
+    points.value = await pointApi.obtainPoints(API_Decision.Only_Failure);
     if (points.value != null && points.value!.length > 0) {
       selectedPointId.value = points.value!.elementAt(0).id!.toInt();
     }
@@ -53,8 +54,9 @@ class AssignedPoliceController extends GetxController {
   }
 
   showAssignments() async {
+    EventPointAssignmentModelApi eventPointAssignmentModelApi = EventPointAssignmentModelApi();
     eventPointAssignmentModel.value =
-        await EventPointAssignmentModelApi.obtainEventPointAssignments(
+        await eventPointAssignmentModelApi.obtainEventPointAssignments(
             API_Decision.BOTH, selectedEventId.value, selectedPointId.value);
     print(eventPointAssignmentModel);
     update();

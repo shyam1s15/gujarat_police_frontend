@@ -11,7 +11,7 @@ import 'PoliceStationModel.dart';
 import 'package:flutter/services.dart';
 
 class PoliceStationApi {
-  static Future<List<PoliceStationModel>> obtainPoliceStationModel(API_Decision showStatus) async {
+  Future<List<PoliceStationModel>> obtainPoliceStationModel(API_Decision showStatus) async {
     List<PoliceStationModel> policeStations = <PoliceStationModel>[];
     final response = await http.get(
       Uri.parse(APIConstants.POLICESTATION_URL),
@@ -52,7 +52,7 @@ class PoliceStationApi {
     return policeStations;
   }
   
-  static Future<String> insertPoliceStationUsingExcel(
+  Future<String> insertPoliceStationUsingExcel(
       API_Decision showStatus,
       Uint8List? policeStationFile,
       String fileName,
@@ -105,7 +105,7 @@ class PoliceStationApi {
     return "";
   }
 
-  static downloadSampleApi(API_Decision showStatus) async {
+  downloadSampleApi(API_Decision showStatus) async {
     final response = await http.get(
       Uri.parse(APIConstants.POLICESTATION_SAMPLE_EXCEL),
       headers: <String, String>{

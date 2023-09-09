@@ -39,8 +39,9 @@ class AssesmentController extends GetxController {
   }
 
   void getEventAssignments() async {
+    EventPoliceCountAPI api = EventPoliceCountAPI();
     eventAssignmentCounts.value =
-        await EventPoliceCountAPI.obtainEventPoliceCountAssignments(
+        await api.obtainEventPoliceCountAssignments(
             API_Decision.Only_Failure, selectedEventId.value);
   }
 
@@ -59,7 +60,8 @@ class AssesmentController extends GetxController {
       DateTime startDate, DateTime endDate) async {
     bool result = false;
     if (eventName.isNotEmpty) {
-      result = await EventApi.createEvent(API_Decision.Only_Success, eventName,
+      EventApi eventApi = EventApi();
+      result = await eventApi.createEvent(API_Decision.Only_Success, eventName,
           eventDetails, startDate, endDate);
       loadEvents();
       update();

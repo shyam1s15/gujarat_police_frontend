@@ -35,7 +35,7 @@ class AssignedPoliceByEventView
                 }),
               ),
               onPressed: () {
-                CustomRouteManager.ASSIGNED_POLICE_ADD();
+                CustomRouteManager().ASSIGNED_POLICE_ADD();
               },
               child: Row(
                 children: const [

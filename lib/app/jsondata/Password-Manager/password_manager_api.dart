@@ -10,7 +10,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PassworManegerAPI {
-  static Future<String> createPasswordFromApi(
+  Future<String> createPasswordFromApi(
       API_Decision showStatus, int eventId) async {
     final modelApiData = {
       "event-id": eventId,
@@ -56,7 +56,7 @@ class PassworManegerAPI {
         "could not create password, please try again later.");
   }
 
-  static Future<PasswordHistoriesModel> getPasswordHistories(
+  Future<PasswordHistoriesModel> getPasswordHistories(
       API_Decision showStatus) async {
     final response = await http.get(
       Uri.parse(APIConstants.PASSWORD_MANAGER_HISTORY),

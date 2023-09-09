@@ -50,7 +50,7 @@ class _DutiPointButtonState extends State<DutiPointButton> {
   }
 
   Future<bool> _obtainZones() async {
-    List<Zone> obtainedZones = await ZoneApi.obtainZones(API_Decision.Only_Failure);
+    List<Zone> obtainedZones = await ZoneApi().obtainZones(API_Decision.Only_Failure);
     if (obtainedZones.isNotEmpty) {
       setState(() {
         zones = obtainedZones;

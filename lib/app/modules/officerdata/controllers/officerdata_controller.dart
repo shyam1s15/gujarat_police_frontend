@@ -32,8 +32,9 @@ class OfficerdataController extends GetxController {
   }
 
   void getEventAssignments() async {
+    EventPoliceCountAPI eventPoliceCountAPI = EventPoliceCountAPI();
     eventAssignmentCounts.value =
-        await EventPoliceCountAPI.obtainEventPoliceCountAssignments(API_Decision.Only_Failure, selectedEventId.value);
+        await eventPoliceCountAPI.obtainEventPoliceCountAssignments(API_Decision.Only_Failure, selectedEventId.value);
   }
 
   void changeSelectedEvent(num? value) {
@@ -50,7 +51,8 @@ class OfficerdataController extends GetxController {
   }
 
   void getPoliceData() async {
-    policeList.value = await PoliceApi.getPoliceInEvent(API_Decision.Only_Failure, selectedEventId.value);
+    PoliceApi policeApi = PoliceApi();
+    policeList.value = await policeApi.getPoliceInEvent(API_Decision.Only_Failure, selectedEventId.value);
     if (policeList.value != null) {
       policeDataGridSource.value = PoliceGridSource(policeList.value!);
     }
@@ -68,14 +70,16 @@ class OfficerdataController extends GetxController {
         return obj;
       }
     }).toList();
-    PoliceApi.updatePolice(API_Decision.Only_Failure, contentList);
+    
+    PoliceApi().updatePolice(API_Decision.Only_Failure, contentList);
     update();
   }
 
   void deletePoliceById(int index) async {
     print(index);
+    PoliceApi policeApi = PoliceApi();
     index -= 1;
-    bool deleted = await PoliceApi()
+    bool deleted = await policeApi
         .deletePolice(API_Decision.Only_Failure, policeList.value![index].id);
     if (deleted) {
       policeList.value!

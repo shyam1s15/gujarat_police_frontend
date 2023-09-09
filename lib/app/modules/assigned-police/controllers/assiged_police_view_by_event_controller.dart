@@ -35,7 +35,7 @@ class AssignedPoliceByEventController extends GetxController {
 
   showAssignments() async {
     eventAssignmentModel.value =
-        await EventPointAssignmentModelApi.obtainEventWiseAssignments(
+        await EventPointAssignmentModelApi().obtainEventWiseAssignments(
             API_Decision.BOTH, selectedEventId.value);
     update();
   }

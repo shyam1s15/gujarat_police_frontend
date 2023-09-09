@@ -39,7 +39,8 @@ class AssignedPoliceAddController extends GetxController {
 
   void loadPoints() async {
     print("done");
-    points.value = await PointApi.obtainPoints(API_Decision.Only_Failure);
+    PointApi pointApi = PointApi();
+    points.value = await pointApi.obtainPoints(API_Decision.Only_Failure);
     if (points.value != null && points.value!.length > 0) {
       selectedPointId.value = points.value!.elementAt(0).id!.toInt();
     }
@@ -57,8 +58,9 @@ class AssignedPoliceAddController extends GetxController {
   }
 
   void loadPolice({String searchTerm = ''}) async {
+    EventPoliceCountAPI eventPoliceCountAPI = EventPoliceCountAPI();
     policeNames.value =
-        await EventPoliceCountAPI.getUnAssignedPoliceIdNameDesigNumbList(
+        await eventPoliceCountAPI.getUnAssignedPoliceIdNameDesigNumbList(
             API_Decision.Only_Failure, selectedEventId.value, searchTerm);
     update();
   }
@@ -93,7 +95,8 @@ class AssignedPoliceAddController extends GetxController {
       throw ValidationException().showValidationSnackBar();
     }
     List<num?> selectedPoliceIds = selectedPolice.map((e) => e.id).toList();
-    bool result = await AssignPoliceApi.assignMultiplePoliceManually(
+    AssignPoliceApi assignPoliceApi = AssignPoliceApi();
+    bool result = await assignPoliceApi.assignMultiplePoliceManually(
         API_Decision.BOTH,
         selectedPoliceIds,
         selectedPointId.value,

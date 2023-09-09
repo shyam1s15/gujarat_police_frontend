@@ -9,7 +9,7 @@ import '../../../constants/enums.dart';
 import '../PoliceData/police_model.dart';
 
 class PoliceApi {
-  static Future<String> insertPoliceUsingExcel(
+  Future<String> insertPoliceUsingExcel(
       API_Decision showStatus,
       int eventId,
       Uint8List? policeFile,
@@ -75,7 +75,7 @@ class PoliceApi {
     return "";
   }
 
-  static Future<List<PoliceModel>> getPoliceInEvent(
+  Future<List<PoliceModel>> getPoliceInEvent(
       API_Decision showStatus, num eventId) async {
     List<PoliceModel> policeList = <PoliceModel>[];
 
@@ -165,7 +165,7 @@ class PoliceApi {
     return false;
   }
 
-  static void updatePolice(
+  void updatePolice(
       API_Decision showStatus, PoliceModel contentList) async {
     final modelApiData = {
       "full-name": contentList.fullName,
@@ -214,7 +214,7 @@ class PoliceApi {
     }
   }
 
-  static Future<String> downloadSampleApi(API_Decision showStatus) async {
+  Future<String> downloadSampleApi(API_Decision showStatus) async {
     final response = await http.get(
       Uri.parse(APIConstants.POLICE_SAMPLE_EXCEL),
       headers: <String, String>{

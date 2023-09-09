@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'dart:convert' show utf8;
 
 class AssignPoliceApi {
-  static Future<bool> assignMultiplePoliceManually(
+  Future<bool> assignMultiplePoliceManually(
       API_Decision showStatus,
       List<num?> policeIds,
       num pointId,

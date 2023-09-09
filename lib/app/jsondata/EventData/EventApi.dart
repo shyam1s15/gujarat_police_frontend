@@ -54,7 +54,8 @@ class EventApi {
     return events;
   }
 
-  static Future<bool> createEvent(API_Decision showStatus, String eventName,
+  // modified
+  Future<bool> createEvent(API_Decision showStatus, String eventName,
       String eventDetails, DateTime eventStartDate, DateTime eventEndDate) async {
     final modelApiData = {
       'event-name': eventName,

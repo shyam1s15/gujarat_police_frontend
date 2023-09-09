@@ -34,7 +34,8 @@ class AssignedPoliceController extends GetxController {
   }
 
   void loadEvents() async {
-    events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
+    EventApi eventApi = EventApi();
+    events.value = await eventApi.obtainEvents(API_Decision.Only_Failure);
     if (events.value != null && events.value!.length > 0) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
     }

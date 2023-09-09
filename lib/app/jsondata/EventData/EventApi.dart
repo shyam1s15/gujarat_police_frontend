@@ -8,7 +8,8 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 
 class EventApi {
-  static Future<List<Event>> obtainEvents(API_Decision showStatus) async {
+  // modified
+  Future<List<Event>> obtainEvents(API_Decision showStatus) async {
     List<Event> events = <Event>[];
     final response = await http.get(
       Uri.parse(APIConstants.EVENT_URL),

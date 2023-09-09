@@ -36,7 +36,8 @@ class SettingController extends GetxController {
   }
 
   void loadEvents() async {
-    events.value = (await EventApi.obtainEvents(API_Decision.Only_Failure));
+    EventApi eventApi = EventApi();
+    events.value = (await eventApi.obtainEvents(API_Decision.Only_Failure));
     if (events.value != null && events.value!.length > 0) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
     }
@@ -50,7 +51,8 @@ class SettingController extends GetxController {
 
   void createPassword() async {
     if (selectedEventId.value != 0) {
-      String password = await PassworManegerAPI.createPasswordFromApi(
+      PassworManegerAPI api = PassworManegerAPI();
+      String password = await api.createPasswordFromApi(
           API_Decision.Only_Failure, selectedEventId.value);
       if (TextUtils.notBlankNotEmpty(password)) {
         passwordPopup(
@@ -68,8 +70,9 @@ class SettingController extends GetxController {
   }
 
   void loadPasswordHistories() async {
+    PassworManegerAPI api = PassworManegerAPI();
     passwordHistories.value =
-        await PassworManegerAPI.getPasswordHistories(API_Decision.BOTH);
+        await api.getPasswordHistories(API_Decision.BOTH);
     update();
   }
 

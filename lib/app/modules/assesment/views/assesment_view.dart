@@ -155,7 +155,7 @@ class AssesmentView extends GetView<AssesmentController> {
                   heroTag: const Text("Event Assement"),
                   backgroundColor: const Color.fromARGB(100, 28, 54, 105),
                   onPressed: () {
-                    CustomRouteManager.ASSESMENT_CREATE();
+                    CustomRouteManager().ASSESMENT_CREATE();
                   },
                   child: const Icon(
                     Icons.add_circle_outline,

@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 import 'PointPoliceCountAssignmentModel.dart';
 
 class PointPoliceCountApi {
-  // static Future<List<EventPoliceCountModel>> obtainA
-  static Future<bool> createAssignment(
+  // Future<List<EventPoliceCountModel>> obtainA
+  Future<bool> createAssignment(
       API_Decision showStatus, Map modelApiData) async {
     final response =
         await http.post(Uri.parse(APIConstants.POINT_POLICE_COUNT_CREATE),
@@ -51,7 +51,7 @@ class PointPoliceCountApi {
     return false;
   }
 
-  static Future<PointPoliceCountAssignment> obtainPointPoliceAssignments(
+  Future<PointPoliceCountAssignment> obtainPointPoliceAssignments(
       API_Decision showStatus, num? eventId, num? pointId) async {
     int obtainedEventId, obtainedPointId;
     String eventName;
@@ -117,7 +117,7 @@ class PointPoliceCountApi {
     throw DataNotFoundException("Data not found for pointPoliceAssignment");
   }
 
-  static Future<List<PointPoliceCountAssignment>> obtainEntireEventAssignments(
+  Future<List<PointPoliceCountAssignment>> obtainEntireEventAssignments(
       API_Decision showStatus, num? eventId) async {
     String eventName;
     List<Assignment> assignments = [];
@@ -175,7 +175,7 @@ class PointPoliceCountApi {
     throw DataNotFoundException("Data not found for pointPoliceAssignment");
   }
 
-  static saveUpdatePointAssignment(API_Decision showStatus, PointPoliceCountAssignment? modelApiData) async {
+  saveUpdatePointAssignment(API_Decision showStatus, PointPoliceCountAssignment? modelApiData) async {
     final response =
         await http.post(Uri.parse(APIConstants.POINT_POLICE_COUNT_SAVE_UPDATE),
             headers: <String, String>{

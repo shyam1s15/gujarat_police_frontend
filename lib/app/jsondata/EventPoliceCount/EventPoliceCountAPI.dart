@@ -11,8 +11,8 @@ import '../PoliceData/PoliceIdNameModel.dart';
 import 'EventPoliceCountOfAssignedTotalRequestedModel.dart';
 
 class EventPoliceCountAPI {
-  // static Future<List<EventPoliceCountModel>> obtainA
-  static Future<bool> createAssignment(
+  // Future<List<EventPoliceCountModel>> obtainA
+  Future<bool> createAssignment(
       API_Decision showStatus, Map modelApiData) async {
     final response =
         await http.post(Uri.parse(APIConstants.EVENT_POLICE_COUNT_CREATE),
@@ -55,7 +55,7 @@ class EventPoliceCountAPI {
     return false;
   }
 
-  static Future<List<PoliceIdName>> getUnAssignedPoliceList(
+  Future<List<PoliceIdName>> getUnAssignedPoliceList(
       API_Decision showStatus, num eventId) async {
     final response = await http.get(
       Uri.parse(APIConstants.EVENT_POLICE_COUNT_UNASSIGNED_POLICE_LIST +
@@ -104,7 +104,7 @@ class EventPoliceCountAPI {
         "Data not found from server api hit : event_police_count/unassigned_police_list$eventId");
   }
 
-  static Future<List<PoliceIdNameDesigNumb>>
+  Future<List<PoliceIdNameDesigNumb>>
       getUnAssignedPoliceIdNameDesigNumbList(
           API_Decision showStatus, num eventId, String searchName) async {
     final modelApiData = {'event-id': eventId, 'search-police': searchName};
@@ -157,7 +157,7 @@ class EventPoliceCountAPI {
         "Data not found from server api hit : event_police_count/unassigned_police_list$eventId");
   }
 
-  static Future<List<EventPoliceCountAssignedTotalRequestedModel>>
+  Future<List<EventPoliceCountAssignedTotalRequestedModel>>
       obtainEventPoliceCountAssignments(
           API_Decision showStatus, int eventId) async {
     final response = await http.get(

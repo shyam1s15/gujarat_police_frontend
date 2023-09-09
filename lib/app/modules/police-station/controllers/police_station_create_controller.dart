@@ -40,7 +40,7 @@ class PoliceStationCreateController extends GetxController {
         throw CustomException("Error reading data").validationSnackBar;
       }
 
-      String outputFileLocation = await PoliceStationApi.insertPoliceStationUsingExcel(
+      String outputFileLocation = await PoliceStationApi().insertPoliceStationUsingExcel(
           API_Decision.BOTH,
           fileBytes,
           filename,
@@ -61,7 +61,7 @@ class PoliceStationCreateController extends GetxController {
 
   void downloadPoliceStationSampleFile() async {
     String sampleExcelFileLocation =
-        await PoliceStationApi.downloadSampleApi(API_Decision.Only_Failure);
+        await PoliceStationApi().downloadSampleApi(API_Decision.Only_Failure);
     if (TextUtils.notBlankNotEmpty(sampleExcelFileLocation)) {
         OpenFile.open(sampleExcelFileLocation);
     } else {

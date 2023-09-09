@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 
 class CustomGetx {
-  static final ApiSuccess = Get.snackbar(
+  final ApiSuccess = Get.snackbar(
               "Success",
                "Hello everyone",
                icon: const Icon(Icons.person, color: Colors.white),

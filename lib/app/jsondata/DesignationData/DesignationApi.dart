@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class DesignationApi {
-  static Future<List<Designation>> obtainDesignations(
+  Future<List<Designation>> obtainDesignations(
       API_Decision showStatus) async {
     List<Designation> designations = <Designation>[];
     final response = await http.get(
@@ -51,7 +51,7 @@ class DesignationApi {
     return designations;
   }
 
-  static updateDesignation(
+  updateDesignation(
       API_Decision showStatus, String? name, String? nameInGuj, num? id) async {
     final modelApiData = {
       "id": id,
@@ -98,7 +98,7 @@ class DesignationApi {
   }
 
 
-  static deleteDesignation(
+  deleteDesignation(
       API_Decision showStatus, num? id) async {
     
     print(APIConstants.DESIGNATION_URL_UPDATE + id.toString());

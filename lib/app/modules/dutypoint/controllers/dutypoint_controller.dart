@@ -42,7 +42,8 @@ class DutypointController extends GetxController {
   }
 
   void loadPoints() async {
-    pointList.value = await PointApi.obtainPoints(API_Decision.Only_Failure);
+    PointApi pointApi = PointApi();
+    pointList.value = await pointApi.obtainPoints(API_Decision.Only_Failure);
     if (pointList.value != null && pointList.value!.isNotEmpty) {
       pointDataSource.value = PointDetailViewDataGridSource(pointList.value!);
     }
@@ -52,7 +53,7 @@ class DutypointController extends GetxController {
   }
 
   void loadZones() async {
-    zoneList.value = await ZoneApi.obtainZones(API_Decision.Only_Failure);
+    zoneList.value = await ZoneApi().obtainZones(API_Decision.Only_Failure);
     if (zoneList.value != null && zoneList.value!.isNotEmpty) {
       selectZoneId.value = zoneList.value!.elementAt(0).id!.toInt();
     }
@@ -76,7 +77,8 @@ class DutypointController extends GetxController {
           .showValidationSnackBar();
     }
     if (zoneList.value != null && zoneList.value!.length > 0) {
-      bool result = await PointApi.createPoint(API_Decision.BOTH, taluka,
+      PointApi pointApi = PointApi();
+      bool result = await pointApi.createPoint(API_Decision.BOTH, taluka,
           district, pointName, accessories, remarks, selectZoneId.value);
       if (result) {
         loadPoints();

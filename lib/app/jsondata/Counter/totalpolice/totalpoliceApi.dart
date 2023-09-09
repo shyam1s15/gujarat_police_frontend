@@ -8,7 +8,7 @@ import 'dart:convert' show utf8;
 import 'dart:convert';
 
 class TotalpoliceApi {
-  static Future<List<Totalpolice>> obtainTotalpolice(
+  Future<List<Totalpolice>> obtainTotalpolice(
       API_Decision showStatus) async {
     List<Totalpolice> TotalPolices = <Totalpolice>[];
     final response = await http.get(

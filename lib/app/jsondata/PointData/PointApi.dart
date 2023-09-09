@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PointApi {
-  static Future<List<Point>> obtainPoints(API_Decision showStatus) async {
+  Future<List<Point>> obtainPoints(API_Decision showStatus) async {
     List<Point> points = <Point>[];
     final response = await http.get(
       Uri.parse(APIConstants.POINT_URL),
@@ -48,7 +48,7 @@ class PointApi {
     return points;
   }
 
-  static Future<bool> createPoint(
+  Future<bool> createPoint(
       API_Decision showStatus,
       String taluka,
       String district,
@@ -104,7 +104,7 @@ class PointApi {
     return false;
   }
 
-  static Future<List<Point>> obtainAssignedPolicePointsInEvent(API_Decision showStatus, num eventId) async {
+  Future<List<Point>> obtainAssignedPolicePointsInEvent(API_Decision showStatus, num eventId) async {
     List<Point> points = <Point>[];
     final response = await http.get(
       Uri.parse("${APIConstants.POINT_POLICE_ASSIGNED_POINT}/$eventId"),

@@ -16,7 +16,9 @@ class EventCreateController extends GetxController {
     bool result = false;
     if (eventNameTextEditController.text.isNotEmpty &&
         eventDetailsTextEditingController.text.isNotEmpty) {
-      result = await EventApi.createEvent(
+      EventApi eventApi = EventApi();
+
+      result = await eventApi.createEvent(
           API_Decision.BOTH,
           eventNameTextEditController.text,
           eventDetailsTextEditingController.text,

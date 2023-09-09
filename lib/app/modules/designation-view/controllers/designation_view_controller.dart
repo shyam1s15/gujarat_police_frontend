@@ -27,12 +27,14 @@ class DesignationViewController extends GetxController {
   }
 
   void loadDesignations() async {
+    DesignationApi designationApi = DesignationApi();
     designations.value =
-        await DesignationApi.obtainDesignations(API_Decision.BOTH);
+        await designationApi.obtainDesignations(API_Decision.BOTH);
   }
 
   deleteDesignation(num? id) async {
-    bool result = await DesignationApi.deleteDesignation(
+    DesignationApi designationApi = DesignationApi();
+    bool result = await designationApi.deleteDesignation(
         API_Decision.BOTH, id);
     if (result) {
       designations.value!.removeWhere((d) => d.id == id);
@@ -52,8 +54,8 @@ class DesignationViewController extends GetxController {
       throw ValidationException(cause: "Nothing to update")
           .showValidationSnackBar();
     }
-
-    bool result = await DesignationApi.updateDesignation(
+    DesignationApi designationApi = DesignationApi();
+    bool result = await designationApi.updateDesignation(
         API_Decision.BOTH, name, nameInGuj, id);
     if (result) {
       designations.value = designations.value!

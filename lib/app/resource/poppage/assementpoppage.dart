@@ -64,7 +64,8 @@ class _AssessmentPoPPageState extends State<AssessmentPOPPage> {
   void saveEvent() async {
     bool result = false;
     if (eventNameTextEdit.text.isNotEmpty) {
-      result = await EventApi.createEvent(
+      EventApi eventApi = EventApi();
+      result = await eventApi.createEvent(
           API_Decision.Only_Success,
           eventNameTextEdit.text,
           eventDetailsTextEditingController.text,

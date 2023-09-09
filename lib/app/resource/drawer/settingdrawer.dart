@@ -20,22 +20,22 @@ class SettingDrawer extends StatelessWidget{
             ),
             ListTile(
               title: const Text('Password Manager'),
-              onTap:(){CustomRouteManager.SETTING();},
+              onTap:(){CustomRouteManager().SETTING();},
             ),
             ListTile(
               title: const Text('Add Police'),
-              onTap:(){CustomRouteManager.POLICE_CREATE();},
+              onTap:(){CustomRouteManager().POLICE_CREATE();},
             ),
             ListTile(
               title: const Text('Add Police-Station'),
               onTap: () {
-                CustomRouteManager.POLICE_STATION();
+                CustomRouteManager().POLICE_STATION();
               },
             ),
             ListTile(
               title: const Text(' Designation'),
               onTap: () {
-                CustomRouteManager.DESIGNATION_VIEW();
+                CustomRouteManager().DESIGNATION_VIEW();
               },
             ),
           ],

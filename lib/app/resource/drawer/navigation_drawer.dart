@@ -152,19 +152,19 @@ class Navigation_Drawer extends StatelessWidget {
 
   navigate(int index) {
     if (index == 0) {
-      CustomRouteManager.ASSESMENT();
+      CustomRouteManager().ASSESMENT();
     } else if (index == 1) {
-      CustomRouteManager.PointAssesment();
+      CustomRouteManager().PointAssesment();
     } else if (index == 2) {
-      CustomRouteManager.DUTYPOINT();
+      CustomRouteManager().DUTYPOINT();
     } else if (index == 3) {
-      CustomRouteManager.DUTYPOINTALLOCATION();
+      CustomRouteManager().DUTYPOINTALLOCATION();
     } else if (index == 4) {
-      CustomRouteManager.OFFICERDATA();
+      CustomRouteManager().OFFICERDATA();
     } else if (index == 5) {
-      CustomRouteManager.ROADBANDOBAST();
+      CustomRouteManager().ROADBANDOBAST();
     } else if (index == 6) {
-      CustomRouteManager.SETTING();
+      CustomRouteManager().SETTING();
     }
   }
 }

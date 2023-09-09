@@ -1,6 +1,3 @@
-import 'package:e_bandobas/app/Exceptions/ValidationException.dart';
-import 'package:e_bandobas/app/jsondata/DesignationData/Designation.dart';
-import 'package:e_bandobas/app/jsondata/DesignationData/DesignationApi.dart';
 import 'package:e_bandobas/app/jsondata/EventData/Event.dart';
 import 'package:e_bandobas/app/jsondata/EventData/EventApi.dart';
 import 'package:e_bandobas/app/jsondata/EventPoliceCount/EventPoliceCountAPI.dart';
@@ -9,7 +6,6 @@ import 'package:e_bandobas/app/jsondata/PointData/PointApi.dart';
 import 'package:e_bandobas/app/jsondata/PointData/Point.dart';
 import 'package:e_bandobas/app/jsondata/PointPoliceCount/PointPoliceCountApi.dart';
 import 'package:e_bandobas/constants/enums.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../jsondata/PointPoliceCount/PointPoliceCountAssignmentModel.dart';
@@ -73,13 +69,15 @@ class PointAssesmentController extends GetxController {
   }
 
   void getEventAssignments() async {
+    EventPoliceCountAPI api = EventPoliceCountAPI();
     eventAssignmentCounts.value =
-    await EventPoliceCountAPI.obtainEventPoliceCountAssignments(
+    await api.obtainEventPoliceCountAssignments(
         API_Decision.Only_Failure, selectedEventId.value);
   }
 
   void loadEvents() async {
-    events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
+    EventApi eventApi = EventApi();
+    events.value = await eventApi.obtainEvents(API_Decision.Only_Failure);
     if (events.value != null && events.value!.isNotEmpty) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
       getEventAssignments();
@@ -89,8 +87,9 @@ class PointAssesmentController extends GetxController {
 
   Future<void> loadPointAssignmentCount() async {
     if (events.value != null) {
+      PointPoliceCountApi pointPoliceCountApi = PointPoliceCountApi();
       pointPoliceAssignments.value =
-      await PointPoliceCountApi.obtainEntireEventAssignments(
+      await pointPoliceCountApi.obtainEntireEventAssignments(
           API_Decision.Only_Failure, selectedEventId.value);
       if (pointPoliceAssignments.value != null) {
         if (pointPoliceAssignments.value!.length > 0) {
@@ -113,8 +112,9 @@ class PointAssesmentController extends GetxController {
 
   void loadSelectedPointAssignmentCount() async {
     if (selectedEventId.value != null && selectedPointId.value != null) {
+      PointPoliceCountApi pointPoliceCountApi = PointPoliceCountApi();
       selectedPointAssignment.value =
-      await PointPoliceCountApi.obtainPointPoliceAssignments(
+      await pointPoliceCountApi.obtainPointPoliceAssignments(
           API_Decision.Only_Failure,
           selectedEventId.value,
           selectedPointId.value);
@@ -133,7 +133,8 @@ class PointAssesmentController extends GetxController {
   }
 
   void loadPoints() async {
-    pointList.value = await PointApi.obtainPoints(API_Decision.Only_Failure);
+    PointApi pointApi = PointApi();
+    pointList.value = await pointApi.obtainPoints(API_Decision.Only_Failure);
     if (pointList.value != null && pointList.value!.isNotEmpty) {
       selectedPointId.value = pointList.value!.elementAt(0).id!.toInt();
       await loadPointAssignmentCount();
@@ -168,8 +169,9 @@ class PointAssesmentController extends GetxController {
   }
 
   void savePointAssignment() async {
+    PointPoliceCountApi pointPoliceCountApi = PointPoliceCountApi();
     if (selectedPointAssignment.value != null) {
-      await PointPoliceCountApi.saveUpdatePointAssignment(
+      await pointPoliceCountApi.saveUpdatePointAssignment(
           API_Decision.Only_Failure, selectedPointAssignment.value);
     }
     // add in list and reduce in policev2 list andreload data source

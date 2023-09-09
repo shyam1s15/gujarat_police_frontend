@@ -37,7 +37,8 @@ class PoliceCreateController extends GetxController {
   }
 
   void loadEvents() async {
-    events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
+    EventApi eventApi = EventApi();
+    events.value = await eventApi.obtainEvents(API_Decision.Only_Failure);
     if (events.value != null && events.value!.isNotEmpty) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
     }
@@ -58,8 +59,8 @@ class PoliceCreateController extends GetxController {
       if (fileBytes == null) {
         throw CustomException("Error reading data").validationSnackBar;
       }
-
-      String outputFileLocation = await PoliceApi.insertPoliceUsingExcel(
+      PoliceApi policeApi = PoliceApi();
+      String outputFileLocation = await policeApi.insertPoliceUsingExcel(
           API_Decision.BOTH,
           selectedEventId.value,
           fileBytes,
@@ -89,7 +90,7 @@ class PoliceCreateController extends GetxController {
 
   void downloadPoliceSampleFile() async {
     String sampleExcelFileLocation =
-        await PoliceApi.downloadSampleApi(API_Decision.Only_Failure);
+        await PoliceApi().downloadSampleApi(API_Decision.Only_Failure);
     if (TextUtils.notBlankNotEmpty(sampleExcelFileLocation)) {
         OpenFile.open(sampleExcelFileLocation);
     } else {

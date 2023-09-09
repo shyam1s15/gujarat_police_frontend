@@ -5,12 +5,8 @@ import 'package:e_bandobas/app/jsondata/EventPointAssignmentData/eventPointAssig
 import 'package:e_bandobas/constants/enums.dart';
 import 'package:e_bandobas/utils/text_utils.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import '../../../jsondata/EventPointAssignmentData/eventAssignmentModel.dart';
-import 'dart:io';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:open_file_plus/open_file_plus.dart';
-import 'package:http/http.dart' as http;
 
 class DutypointallocationController extends GetxController {
   late final selectedEventId = 0.obs;
@@ -28,7 +24,8 @@ class DutypointallocationController extends GetxController {
   void increment() => count.value++;
 
   void loadEvents() async {
-    events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
+    EventApi eventApi = EventApi();
+    events.value = await eventApi.obtainEvents(API_Decision.Only_Failure);
     if (events.value != null && events.value!.length > 0) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
     }
@@ -42,7 +39,7 @@ class DutypointallocationController extends GetxController {
 
   showAssignments() async {
     eventAssignmentModel.value =
-        await EventPointAssignmentModelApi.obtainEventWiseAssignments(
+        await EventPointAssignmentModelApi().obtainEventWiseAssignments(
             API_Decision.BOTH, selectedEventId.value);
     update();
   }

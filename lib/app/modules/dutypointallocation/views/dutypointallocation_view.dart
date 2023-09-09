@@ -32,7 +32,7 @@ class DutypointallocationView extends GetView<DutypointallocationController> {
                 heroTag: const Text("Assigned Police"),
                 backgroundColor: Colors.lightGreen,
                 onPressed: () {
-                  CustomRouteManager.ASSIGNED_POLICE();
+                  CustomRouteManager().ASSIGNED_POLICE();
                 },
                 child: const Icon(
                   Icons.add_circle_outline,

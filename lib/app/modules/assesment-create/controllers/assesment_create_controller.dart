@@ -16,8 +16,9 @@ class AssesmentCreateController extends GetxController {
   final events = Rxn<List<Event>>();
 
   void loadDesignations() async {
+    DesignationApi designationApi = DesignationApi();
     designations.value =
-        await DesignationApi.obtainDesignations(API_Decision.Only_Failure);
+        await designationApi.obtainDesignations(API_Decision.Only_Failure);
     if (designations.value != null) {
       for (var i in designations.value!) {
         var textEditingController = TextEditingController(text: "");
@@ -28,7 +29,8 @@ class AssesmentCreateController extends GetxController {
   }
 
   void loadEvents() async {
-    events.value = await EventApi.obtainEvents(API_Decision.Only_Failure);
+    EventApi eventApi = EventApi();
+    events.value = await eventApi.obtainEvents(API_Decision.Only_Failure);
     if (events.value != null && events.value!.isNotEmpty) {
       selectedEventId.value = events.value!.elementAt(0).id!.toInt();
     }
@@ -50,7 +52,8 @@ class AssesmentCreateController extends GetxController {
       "designations": designationsData
     };
     EventPoliceCountModel e = EventPoliceCountModel(eventId: selectedEventId.value, designations: designationsData);
-    bool result = await EventPoliceCountAPI.createAssignment(
+    EventPoliceCountAPI eventPoliceCountAPI = EventPoliceCountAPI();
+    bool result = await eventPoliceCountAPI.createAssignment(
         API_Decision.BOTH, eventPoliceCountData);
   }
   @override

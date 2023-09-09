@@ -17,7 +17,7 @@ class PoliceStationView extends GetView<PoliceStationController> {
           actions: [
             ElevatedButton(
                 onPressed: () {
-                  CustomRouteManager.POLICE_STATION_CREATE();
+                  CustomRouteManager().POLICE_STATION_CREATE();
                 },
                 child: Text("+ add police station")),
           ],

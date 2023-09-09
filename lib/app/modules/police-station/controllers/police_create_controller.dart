@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:e_bandobas/app/jsondata/Police/police_api.dart';
 import 'package:get/get.dart';
 import 'package:open_file_plus/open_file_plus.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../../constants/enums.dart';
 import '../../../../utils/text_utils.dart';

@@ -1,4 +1,3 @@
-import '../PoliceData/PoliceIdNameDesigNumbModel.dart';
 import 'eventPointAssignmentModel.dart';
 
 class EventAssignmentModel {
